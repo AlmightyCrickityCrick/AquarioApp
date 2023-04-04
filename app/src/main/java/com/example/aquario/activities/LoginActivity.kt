@@ -1,4 +1,4 @@
-package com.example.aquario.ui.login
+package com.example.aquario.activities
 
 import android.app.Activity
 import androidx.lifecycle.Observer
@@ -15,6 +15,9 @@ import android.widget.Toast
 import com.example.aquario.databinding.ActivityLoginBinding
 
 import com.example.aquario.R
+import com.example.aquario.ui.login.LoggedInUserView
+import com.example.aquario.ui.login.LoginViewModel
+import com.example.aquario.ui.login.LoginViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
 
