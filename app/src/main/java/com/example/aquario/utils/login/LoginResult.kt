@@ -1,4 +1,4 @@
-package com.example.aquario.ui.login
+package com.example.aquario.utils.login
 
 /**
  * Authentication result : success (user details) or error message.

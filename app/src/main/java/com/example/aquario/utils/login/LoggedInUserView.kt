@@ -1,4 +1,4 @@
-package com.example.aquario.ui.login
+package com.example.aquario.utils.login
 
 /**
  * User details post authentication that is exposed to the UI

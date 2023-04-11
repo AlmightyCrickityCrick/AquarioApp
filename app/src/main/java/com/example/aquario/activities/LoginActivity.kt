@@ -15,9 +15,9 @@ import android.widget.Toast
 import com.example.aquario.databinding.ActivityLoginBinding
 
 import com.example.aquario.R
-import com.example.aquario.ui.login.LoggedInUserView
-import com.example.aquario.ui.login.LoginViewModel
-import com.example.aquario.ui.login.LoginViewModelFactory
+import com.example.aquario.utils.login.LoggedInUserView
+import com.example.aquario.utils.login.LoginViewModel
+import com.example.lostfound.utils.login.LoginViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.aquario.ui.login
+package com.example.aquario.utils.login
 
 /**
  * Data validation state of the login form.

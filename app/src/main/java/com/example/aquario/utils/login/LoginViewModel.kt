@@ -1,4 +1,4 @@
-package com.example.aquario.ui.login
+package com.example.aquario.utils.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,13 +9,13 @@ import com.example.aquario.data.Result
 
 import com.example.aquario.R
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+open class LoginViewModel(val loginRepository: LoginRepository) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
-    private val _loginResult = MutableLiveData<LoginResult>()
-    val loginResult: LiveData<LoginResult> = _loginResult
+    protected val _loginResult = MutableLiveData<LoginResult>()
+    open val loginResult: LiveData<LoginResult> = _loginResult
 
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
@@ -29,7 +29,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         }
     }
 
-    fun loginDataChanged(username: String, password: String) {
+    open fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {
             _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
         } else if (!isPasswordValid(password)) {
