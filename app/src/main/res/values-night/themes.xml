@@ -10,8 +10,8 @@
             <item name="textColorLight">@color/whitest</item>
             <item name="inputColor">@color/offwhite</item>
             <item name="colorPrimary">@color/orange</item>
-            <item name="drawerColor">@color/whitest</item>
-            <item name="cardBackground">@color/whitest</item>
+            <item name="drawerColor">@color/offwhite</item>
+            <item name="cardBackground">@color/offwhite</item>
             <item name="android:fontFamily">@font/nunito</item>
 
             <!-- Secondary brand color. -->
@@ -28,8 +28,8 @@
             <item name="textColorLight">@color/whitest</item>
             <item name="inputColor">@color/offwhite</item>
             <item name="colorPrimary">@color/orange</item>
-            <item name="drawerColor">@color/whitest</item>
-            <item name="cardBackground">@color/whitest</item>
+            <item name="drawerColor">@color/offwhite</item>
+            <item name="cardBackground">@color/offwhite</item>
             <item name="android:fontFamily">@font/nunito</item>
         </style>
     </resources>

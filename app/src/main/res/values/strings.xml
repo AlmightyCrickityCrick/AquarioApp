@@ -16,4 +16,18 @@
     <string name="register_failed">Register Failed. Please try again</string>
     <string name="please_fill_the_fields_below_to_create_a_new_account">Please fill the fields below to create a new account.</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="sensors">Sensors</string>
+    <string name="analytics">Analytics</string>
+    <string name="feeding">Feeding</string>
+    <string name="video_streaming">Video Streaming</string>
+    <string name="settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="aquarium_nickname">Aquarium Nickname</string>
+    <string name="time_measurement">Time Measurement:</string>
+    <string name="recommended">Recommended:</string>
+    <string name="now">Now:</string>
+    <string name="see_details">See Details</string>
 </resources>
