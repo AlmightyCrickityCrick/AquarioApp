@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SensorDetailsActivity"
+    android:orientation="vertical"
+    android:background="?backgroundColor">
+    <include
+        android:id="@+id/toolbar_sensor_det"
+        layout="@layout/toolbar_sensor_details" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="22dp">
+        <include layout="@layout/card_sensor_state"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="20"
+                android:layout_height="wrap_content"
+                android:text="@string/sensed_data"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                />
+            <ImageView
+                android:id="@+id/btn_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_refresh"
+                android:layout_gravity="end"
+                />
+
+        </LinearLayout>
+        <include
+            android:id="@+id/sensor_data_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/card_sensor_min"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sensor_characteristics"
+            android:layout_gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="18dp"
+            android:background="@drawable/card_sensor_background">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sensor Name:"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                />
+            <TextView
+                android:id="@+id/sensor_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LM35"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sensor_analytics"
+            android:layout_gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"/>
+
+        <LinearLayout
+            android:id="@+id/btn_analytics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="18dp"
+            android:background="@drawable/card_sensor_background">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="See full analytics about this sensors"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_forward_arrow"
+                />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

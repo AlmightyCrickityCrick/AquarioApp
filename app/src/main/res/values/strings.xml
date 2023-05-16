@@ -37,4 +37,8 @@
     <string name="aquarium_code">Aquarium Code</string>
     <string name="nickname">Nickname</string>
     <string name="add">Add</string>
+    <string name="sensor_details">Sensor Details</string>
+    <string name="sensor_analytics">Sensor Analytics</string>
+    <string name="sensor_characteristics">Sensor Characteristics</string>
+    <string name="sensed_data">Sensed Data</string>
 </resources>

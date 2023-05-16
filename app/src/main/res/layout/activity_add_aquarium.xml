@@ -90,7 +90,7 @@
                 android:background="@drawable/background_rounded_input"
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:imeOptions="actionDone"
-                android:inputType="textPassword"
+                android:inputType="text"
 
                 android:selectAllOnFocus="true"/>
         </com.google.android.material.textfield.TextInputLayout>

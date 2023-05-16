@@ -14,7 +14,7 @@ import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navDrawer: NavigationView
+    lateinit var navDrawer: NavigationView
     lateinit var mDrawer:DrawerLayout
 //    private val USER_CONST = "USER"
 //    lateinit var user : LoggedInUser

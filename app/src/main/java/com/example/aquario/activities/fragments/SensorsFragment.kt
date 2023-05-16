@@ -1,5 +1,6 @@
 package com.example.aquario.activities.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aquario.R
+import com.example.aquario.activities.SensorDetailsActivity
 import com.example.aquario.adapters.SensorAdapter
 import com.example.aquario.data.generateSensors
 import com.example.aquario.data.model.AquariumInfo
@@ -89,6 +91,10 @@ class SensorsFragment : Fragment(), SensorListener {
     }
 
     override fun onSensorClicked(sens: SensorInfo) {
-        TODO("Not yet implemented")
+        activity?.let {
+            var intent = Intent(it, SensorDetailsActivity::class.java)
+            intent.putExtra("ID", sens.id)
+            startActivity(intent)
+        }
     }
 }
