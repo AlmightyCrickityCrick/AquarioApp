@@ -8,6 +8,10 @@ import com.example.aquario.data.LoginRepository
 import com.example.aquario.data.Result
 
 import com.example.aquario.R
+import com.example.aquario.data.model.LoggedInUser
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 
 open class LoginViewModel(val loginRepository: LoginRepository) : ViewModel() {
 
@@ -19,14 +23,22 @@ open class LoginViewModel(val loginRepository: LoginRepository) : ViewModel() {
 
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
+        runBlocking {
+            val job = GlobalScope.async { loginRepository.login(username, password) }
+            val result = job.await()
 
-        if (result is Result.Success) {
-            _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
-        } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
+            if (result is Result.Success) {
+                _loginResult.value =
+                    LoginResult(success = LoggedInUserView(displayName = result.data.email))
+            } else {
+                _loginResult.value = LoginResult(error = R.string.login_failed)
+            }
         }
+    }
+
+    fun getUserFromRepository(): LoggedInUser? {
+        print(loginRepository.user)
+        return loginRepository.user
     }
 
     open fun loginDataChanged(username: String, password: String) {
@@ -39,7 +51,6 @@ open class LoginViewModel(val loginRepository: LoginRepository) : ViewModel() {
         }
     }
 
-    // A placeholder username validation check
     private fun isUserNameValid(username: String): Boolean {
         return if (username.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()

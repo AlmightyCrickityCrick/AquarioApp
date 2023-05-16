@@ -1,10 +1,9 @@
-package com.example.lostfound.utils.login
+package com.example.aquario.utils.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.aquario.data.LoginDataSource
 import com.example.aquario.data.LoginRepository
-import com.example.aquario.utils.login.LoginViewModel
 import com.example.aquario.utils.register.RegisterViewModel
 
 /**

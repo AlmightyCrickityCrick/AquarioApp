@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.aquario.R
 import com.example.aquario.adapters.SensorAdapter
 import com.example.aquario.data.generateSensors
+import com.example.aquario.data.model.AquariumInfo
 import com.example.aquario.data.model.SensorInfo
 import com.example.aquario.listeners.SensorListener
+import com.example.aquario.utils.GlobalUser
+import com.example.aquario.utils.setMenuButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,7 +54,9 @@ class SensorsFragment : Fragment(), SensorListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.fragment_toolbar)
         val toolbarFragmentName = toolbar.findViewById<TextView>(R.id.toolbar_fragment_name)
-        toolbarFragmentName.text = getString(R.string.aquarium_nickname)
+        if (GlobalUser.aquariums.size == 0) GlobalUser.aquariums.add(AquariumInfo("bcsrtc", "My Aquarium"))
+        toolbarFragmentName.text = GlobalUser.aquariums[0].nickname
+        activity?.let { setMenuButton(toolbar, it) }
 
         recyclerView = view.findViewById(R.id.sensor_view)
         initAdapter()

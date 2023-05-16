@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?backgroundColor"
+    tools:context=".activities.AddAquariumActivity"
+    >
+    <LinearLayout
+        android:id="@+id/container"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        >
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:text="Register Aquarium"
+            android:textColor="?textColorNormal"
+            android:textSize="48sp"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/please_complete_the_following_fields_to_add_your_aquarium_to_your_account"
+            android:textColor="?textColorNormal"
+            android:textSize="16sp"
+            android:padding="2dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="?textColorNormal"
+            app:hintTextColor="?accentColor"
+            app:boxStrokeColor="?accentColor"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:startIconTint="?textColorNormal"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+
+                android:autofillHints="@string/aquarium_code"
+                android:hint="@string/aquarium_code"
+                android:textColor="?textColorNormal"
+
+                android:textColorHint="?textColorNormal"
+                android:background="@drawable/background_rounded_input"
+                android:inputType="text"
+                android:selectAllOnFocus="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toTopOf="parent" -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textColorHint="?textColorNormal"
+            app:hintTextColor="?accentColor"
+            app:boxStrokeColor="?accentColor"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:startIconTint="?textColorNormal"
+            app:endIconTint="?textColorNormal"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:autofillHints="@string/nickname"
+                android:hint="@string/nickname"
+                android:textColorHint="?textColorNormal"
+                android:textColor="?textColorNormal"
+                android:background="@drawable/background_rounded_input"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+
+                android:selectAllOnFocus="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_aquarium"
+            android:enabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="275dp"
+            android:minHeight="50dp"
+            android:background="@drawable/background_rounded_button"
+            android:textColor="?textColorLight"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password"
+            app:layout_constraintVertical_bias="0.2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="15dp">
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="20dp"/>
+            <!--            android:src="@mipmap/g64"-->
+            <!--            />-->
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_marginHorizontal="20dp"/>
+            <!--            android:src="@mipmap/fb48"-->
+            <!--            />-->
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/password"
+            app:layout_constraintStart_toStartOf="@+id/password"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+
+    </LinearLayout>
+    <me.itangqi.waveloadingview.WaveLoadingView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container"
+        android:id="@+id/waveLoadingView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:wlv_borderColor="?accentColor"
+        app:wlv_borderWidth="3dp"
+        app:wlv_progressValue="40"
+        app:wlv_shapeType="rectangle"
+        app:wlv_round_rectangle="true"
+        app:wlv_triangle_direction="north"
+        app:wlv_waveAmplitude="70"
+        app:wlv_waveColor="?accentColor"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

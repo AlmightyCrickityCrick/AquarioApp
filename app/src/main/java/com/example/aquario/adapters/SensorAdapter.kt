@@ -55,8 +55,8 @@ class SensorAdapter(var si:ArrayList<SensorInfo>, var sensorListener: SensorList
 
         var imageSRC :Int
         imageSRC = when(item.type){
-            "temperature" -> R.drawable.analytics
-            else -> R.drawable.analytics
+            "temperature" -> R.drawable.temperature_sensor
+            else -> R.drawable.ammonium_sensor
         }
         viewHolder.img.setImageResource(imageSRC)
 

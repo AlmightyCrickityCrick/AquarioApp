@@ -1,15 +1,21 @@
 package com.example.aquario.activities
 
+import android.app.Activity
 import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import android.widget.Toast
+import androidx.annotation.StringRes
+import com.example.aquario.R
 import com.example.aquario.databinding.ActivityRegisterBinding
+import com.example.aquario.utils.afterTextChanged
+import com.example.aquario.utils.login.LoggedInUserView
 
 import com.example.aquario.utils.register.RegisterViewModel
-import com.example.lostfound.utils.login.LoginViewModelFactory
+import com.example.aquario.utils.login.LoginViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -46,7 +52,22 @@ class RegisterActivity : AppCompatActivity() {
             }
         })
 
+        registerViewModel.loginResult.observe(this@RegisterActivity, Observer {
+            val loginResult = it ?: return@Observer
 
+            loading.visibility = View.GONE
+            if (loginResult.error != null){
+
+            }
+            if (loginResult.success != null) {
+                updateUiWithUser(loginResult.success)
+                setResult(Activity.RESULT_OK)
+                intent = Intent(this, AddAquariumActivity::class.java)
+                startActivity(intent)
+                this.finish()
+            }
+
+        })
 
         username.afterTextChanged {
             registerViewModel.loginDataChanged(
@@ -63,17 +84,6 @@ class RegisterActivity : AppCompatActivity() {
                 )
             }
 
-//            setOnEditorActionListener { _, actionId, _ ->
-//                when (actionId) {
-//                    EditorInfo.IME_ACTION_DONE ->
-//                        registerViewModel.register(
-//                            username.text.toString(),
-//                            password.text.toString()
-//                        )
-//                }
-//                false
-//            }
-
         }
 
         login.setOnClickListener {
@@ -81,6 +91,26 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
             this.finish()
         }
+
+        signup.setOnClickListener {
+            loading.visibility = View.VISIBLE
+            registerViewModel.register(username.text.toString(), password.text.toString())
+        }
+    }
+
+    private fun updateUiWithUser(model: LoggedInUserView) {
+        val welcome = getString(R.string.welcome)
+        val displayName = model.displayName
+        // TODO : initiate successful logged in experience
+        Toast.makeText(
+            applicationContext,
+            "$welcome $displayName",
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    private fun showLoginFailed(@StringRes errorString: Int) {
+        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
 
 

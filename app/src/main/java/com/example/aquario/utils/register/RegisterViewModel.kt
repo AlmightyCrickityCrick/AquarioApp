@@ -9,6 +9,8 @@ import com.example.aquario.R
 import com.example.aquario.data.LoginRepository
 import com.example.aquario.utils.login.LoginResult
 import com.example.aquario.utils.login.LoginViewModel
+import com.example.aquario.data.Result
+import com.example.aquario.utils.login.LoggedInUserView
 import kotlinx.coroutines.*
 
 class RegisterViewModel (loginRepository: LoginRepository) : LoginViewModel(loginRepository) {
@@ -16,23 +18,22 @@ class RegisterViewModel (loginRepository: LoginRepository) : LoginViewModel(logi
     private val _loginForm = MutableLiveData<RegisterFormState>()
     val registerFormState: LiveData<RegisterFormState> = _loginForm
 
-    //override val _loginResult = MutableLiveData<LoginResult>()
+//    override val _loginResult = MutableLiveData<LoginResult>()
     override val loginResult: LiveData<LoginResult> = _loginResult
 
     @DelicateCoroutinesApi
     fun register(username: String, password: String) {
-        // can be launched in a separate asynchronous job
         runBlocking {
             val job = GlobalScope.async {
-//                loginRepository.register(username, password)
+                loginRepository.register(username, password)
             }
             val result = job.await()
-//            if (result is Result.Success) {
-//                login(username, password)
-//               // _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.data.email))
-//            } else {
-//                _loginResult.value = LoginResult(error = R.string.register_failed)
-//            }
+            if (result is Result.Success) {
+                login(username, password)
+                _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.data.email))
+            } else {
+                _loginResult.value = LoginResult(error = R.string.register_failed)
+            }
         }
         }
 

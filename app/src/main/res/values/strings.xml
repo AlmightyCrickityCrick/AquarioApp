@@ -30,4 +30,11 @@
     <string name="recommended">Recommended:</string>
     <string name="now">Now:</string>
     <string name="see_details">See Details</string>
+    <string name="active_sensors">Active Sensors</string>
+    <string name="invalid_code">Not a valid code</string>
+    <string name="invalid_nickname">This nickname is not allowed</string>
+    <string name="please_complete_the_following_fields_to_add_your_aquarium_to_your_account">Please complete the following fields to add your aquarium to your account.</string>
+    <string name="aquarium_code">Aquarium Code</string>
+    <string name="nickname">Nickname</string>
+    <string name="add">Add</string>
 </resources>

@@ -1,23 +1,22 @@
 package com.example.aquario.activities
 
 import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import android.widget.Toast
 import com.example.aquario.databinding.ActivityLoginBinding
 
 import com.example.aquario.R
+import com.example.aquario.utils.afterTextChanged
 import com.example.aquario.utils.login.LoggedInUserView
 import com.example.aquario.utils.login.LoginViewModel
-import com.example.lostfound.utils.login.LoginViewModelFactory
+import com.example.aquario.utils.login.LoginViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
 
@@ -34,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
         val password = binding.password
         val login = binding.login
         val loading = binding.loading
+        val btnToRegister = binding.btnToRegister
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
@@ -61,11 +61,14 @@ class LoginActivity : AppCompatActivity() {
             }
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
+                intent = Intent(this, MainActivity::class.java)
+                setResult(Activity.RESULT_OK)
+                startActivity(intent)
+                finish()
             }
-            setResult(Activity.RESULT_OK)
+
 
             //Complete and destroy login activity once successful
-            finish()
         })
 
         username.afterTextChanged {
@@ -99,9 +102,15 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
         }
+
+        btnToRegister.setOnClickListener {
+            intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+            this.finish()
+        }
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
+    fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
         // TODO : initiate successful logged in experience
@@ -117,17 +126,3 @@ class LoginActivity : AppCompatActivity() {
     }
 }
 
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
-        }
-
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-    })
-}

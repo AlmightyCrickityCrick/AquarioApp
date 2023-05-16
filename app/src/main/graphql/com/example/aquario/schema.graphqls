@@ -1,0 +1,94 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+scalar GenericScalar
+
+type Query {
+    users: [UserType]
+    user(id: Int): UserType
+    me: UserProfileType
+    aquarium(id: Int): AquariumType
+    fish: FishType
+    aquarium_id: [AquariumIDs]
+    aquarium_sensors(aquarium_id: Int): [AquariumSensors]
+}
+
+type UserType {
+    id: ID!
+    email: String!
+}
+
+type UserProfileType {
+    id: ID!
+    user: UserType!
+}
+
+scalar Time
+
+type AquariumType{
+    id: ID!
+    code: UserType!
+    aquarium_id: String!
+    nickname: String!
+    volume: Int
+    length: Int
+    width: Int
+    height: Int
+    feeding_time: Time
+    sensors: [Int]
+    water_level: Float
+    general_system_state: Float
+}
+
+type FishType{
+    id: ID!
+    fish_type: String!
+    common_name: String!
+    scientific_name: String!
+}
+
+type AquariumIDs{
+    id: ID!
+    aquarium_id: String!
+    code: UserType!
+}
+
+type AquariumSensors{
+    id: ID!
+    sensors: [Int]
+}
+
+type CreateUser {
+    id: ID
+}
+
+type ObtainJSONWebToken {
+    payload: GenericScalar!
+    refreshExpiresIn: Int!
+    token: String!
+}
+
+type Verify {
+    payload: GenericScalar!
+}
+
+type Refresh {
+    payload: GenericScalar!
+    refreshExpiresIn: Int!
+    token: String!
+}
+
+type RegisterAquarium{
+    id: ID
+    message: String
+}
+
+type Mutation {
+    createUser(email: String!, password: String!): CreateUser
+    login(email: String!, password: String!): ObtainJSONWebToken
+    verifyToken(token: String): Verify
+    refreshToken(token: String): Refresh
+    registerAquarium(aquarium_id: String!, nickname: String!): RegisterAquarium
+}
