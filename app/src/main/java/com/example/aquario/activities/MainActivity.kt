@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.aquario.R
+import com.example.aquario.activities.fragments.FeedingFragment
 import com.example.aquario.activities.fragments.SensorsFragment
 import com.example.aquario.data.model.LoggedInUser
 import com.example.aquario.databinding.ActivityMainBinding
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         when(menuItem.itemId){
             R.id.nav_sensors -> {fragment = SensorsFragment() }
 //            R.id.nav_analytics -> {fragment = AnalyticsFragment() }
-//            R.id.nav_feeding ->{fragment = FeedingFragment() }
+            R.id.nav_feeding ->{fragment = FeedingFragment() }
 //            R.id.nav_video->{fragment = VideoFragment()}
 //            R.id.nav_settings->{fragment = SettingFragment()}
         }

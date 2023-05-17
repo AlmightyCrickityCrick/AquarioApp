@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?backgroundColor"
+    tools:context=".activities.fragments.FeedingFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="22dp">
+        <include
+            android:id="@+id/fragment_toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/feed_fish_illustrations"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_sensor_background"
+            android:padding="12dp"
+            android:layout_marginVertical="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="@string/turn_on_off_autofeed"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_feeder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:useMaterialThemeColors="false"
+                app:thumbTint="@color/whitest"
+                app:trackTint="@drawable/selector_switch"
+                android:checked="true"
+                />
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_sensor_background"
+        android:padding="19dp"
+        android:layout_marginVertical="8dp">
+        <TextView
+            android:id="@+id/btn_set_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="20"
+            android:text="@string/set_timer_for_auto_feeding"
+            android:textStyle="bold"
+            android:textSize="14sp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:src="@drawable/timer_icon" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:background="@drawable/card_sensor_background"
+                android:padding="20dp"
+                android:text="Press to feed your fish"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <ImageView
+                android:id="@+id/btn_feed"
+                android:layout_width="60dp"
+                android:layout_weight="3"
+                android:layout_height="60dp"
+                android:src="@drawable/feed_icon_grey"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:background="@drawable/card_sensor_background"
+                android:padding="20dp"
+                android:text="@string/press_to_cook_the_fish"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <ImageView
+                android:id="@+id/btn_cook"
+                android:layout_width="60dp"
+                android:layout_weight="3"
+                android:src="@drawable/cook_icon_orange"
+                android:layout_height="60dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

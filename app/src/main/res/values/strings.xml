@@ -41,4 +41,8 @@
     <string name="sensor_analytics">Sensor Analytics</string>
     <string name="sensor_characteristics">Sensor Characteristics</string>
     <string name="sensed_data">Sensed Data</string>
+    <string name="feeder">Feeder</string>
+    <string name="turn_on_off_autofeed">Turn on/off autofeed</string>
+    <string name="set_timer_for_auto_feeding">Set timer for auto - feeding</string>
+    <string name="press_to_cook_the_fish">Press to cook the fish</string>
 </resources>
