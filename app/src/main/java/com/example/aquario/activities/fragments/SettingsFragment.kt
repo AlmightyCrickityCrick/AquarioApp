@@ -118,6 +118,7 @@ class SettingsFragment : Fragment() {
             button.compoundDrawablePadding = 10
             var tf = ResourcesCompat.getFont(activity!!.applicationContext, R.font.nunito);
             button.setTypeface(tf, Typeface.BOLD)
+            button.setTextColor(resources.getColor(R.color.black))
             if(a.nickname == GlobalUser.aquariums[GlobalUser.currentAquarium].nickname) {
                 button.isChecked = true
                 button.setTextColor(resources.getColor(R.color.orange))

@@ -58,6 +58,9 @@ class SensorsFragment : Fragment(), SensorListener {
         val toolbarFragmentName = toolbar.findViewById<TextView>(R.id.toolbar_fragment_name)
         if (GlobalUser.aquariums.size == 0) GlobalUser.aquariums.add(AquariumInfo("bcsrtc", "My Aquarium"))
         toolbarFragmentName.text = GlobalUser.aquariums[GlobalUser.currentAquarium].nickname
+
+        var nr = view.findViewById<TextView>(R.id.tw_sensor_count)
+        nr.text = sensorInfo.size.toString()
         activity?.let { setMenuButton(toolbar, it) }
 
         recyclerView = view.findViewById(R.id.sensor_view)
@@ -68,6 +71,7 @@ class SensorsFragment : Fragment(), SensorListener {
     private fun initAdapter(){
         adapter = SensorAdapter(sensorInfo, this)
         recyclerView.adapter = adapter
+
     }
 
         companion object {

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?backgroundColor"
+    tools:context=".activities.fragments.AnalyticsFragment">
+    
+<!--    <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView-->
+<!--        android:id="@+id/aa_analytics_chart"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="310dp">-->
+
+<!--    </com.github.aachartmodel.aainfographics.aachartcreator.AAChartView>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <include
+        android:id="@+id/fragment_toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="22dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp">
+            <Spinner
+                android:id="@+id/spinner_sensors"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="18"
+                android:popupBackground="@drawable/background_spinner_dropdown"
+                android:background="@android:color/transparent"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:src="@drawable/ic_switch_quarium"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/label_y_axis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:lines="1"
+                android:rotation="270"
+                android:layout_marginVertical="0dp"
+                android:text="Temp, C"
+                android:textSize="9sp" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/sensor_line_chart"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            />
+
+
+        </LinearLayout>
+        
+        <TextView
+            android:id="@+id/label_x_axis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date, date/month"
+            android:textSize="9sp"
+            android:textAlignment="center"
+            android:layout_marginTop="2dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="17dp"
+            android:text="General data"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_sensor_background"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginVertical="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="Average Value"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_average_val"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="AquariumName"
+                android:textStyle="bold"
+                android:textColor="?accentColor"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_sensor_background"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginVertical="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="Highest Value"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_highest_value"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="AquariumName"
+                android:textStyle="bold"
+                android:textColor="?accentColor"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_sensor_background"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginVertical="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="Current Status"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <ImageView
+                android:id="@+id/iv_current_status"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:src="@drawable/ic_refresh"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_sensor_background"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginVertical="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="Go to sensor details"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <ImageView
+                android:id="@+id/tv_current_aquarium"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:src="@drawable/ic_forward_arrow"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

@@ -9,3 +9,18 @@ fun generateSensors(): ArrayList<SensorInfo> {
     }
     return tmp
 }
+
+fun getSpinnerOptions(): ArrayList<String>{
+    var tmp = ArrayList<String>()
+    tmp.add("Temperature Sensor Data")
+    tmp.add("pH Sensor")
+    tmp.add("O2 Sensor")
+    tmp.add("Turbidity Sensor")
+    return tmp
+}
+
+fun getSensorData(): ArrayList<Int>{
+    var tmp = ArrayList<Int>()
+    for (i in 15 .. 20) tmp.add(i)
+    return tmp
+}

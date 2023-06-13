@@ -48,4 +48,10 @@
     </style>
     <style name="Theme.Aquario.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.Aquario.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/whitest</item>
+    </style>
+
 </resources>
+
