@@ -12,11 +12,19 @@
         <item name="drawerColor">@color/offwhite</item>
         <item name="cardBackground">@color/offwhite</item>
         <item name="android:fontFamily">@font/nunito</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Aquario.BottomSheetDialog</item>
 
         <!-- Secondary brand color. -->
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Aquario.BottomSheetDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item>
+        <item name="elevation">0dp</item>
+        <item name="android:elevation">0dp</item>
     </style>
 
     <style name="NoActionBarTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -30,10 +38,13 @@
         <item name="drawerColor">@color/offwhite</item>
         <item name="cardBackground">@color/offwhite</item>
         <item name="android:fontFamily">@font/nunito</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Aquario.BottomSheetDialog</item>
+
     </style>
     <style name="Theme.Aquario.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Aquario.BottomSheetDialog</item>
     </style>
     <style name="Theme.Aquario.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.Aquario.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

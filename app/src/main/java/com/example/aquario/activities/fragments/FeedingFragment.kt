@@ -54,7 +54,7 @@ class FeedingFragment : Fragment() {
         val feed = view.findViewById<ImageView>(R.id.btn_feed)
 
         val switch = view.findViewById<SwitchMaterial>(R.id.switch_feeder)
-            switch.setOnCheckedChangeListener { _, isChecked ->
+        switch.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     feed.setImageResource(R.drawable.feed_icon_grey)
                 } else {

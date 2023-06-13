@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?backgroundColor"
+    tools:context=".activities.fragments.SettingsFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <include
+        android:id="@+id/fragment_toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="22dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Aquarium"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_sensor_background"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginVertical="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="Current Aquarium:"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_current_aquarium"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="AquariumName"
+                android:textStyle="bold"
+                android:textColor="?accentColor"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btn_switch_aquarium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_sensor_background"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginVertical="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="@string/switch_aquarium"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:src="@drawable/ic_switch_quarium" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btn_edit_aquarium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_sensor_background"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginVertical="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="Edit current aquarium details"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:src="@drawable/ic_forward_arrow"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:text="Account"/>
+        <LinearLayout
+            android:id="@+id/btn_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_sensor_background"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginVertical="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="Edit Profile"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:src="@drawable/ic_forward_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_change_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_sensor_background"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginVertical="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="Change Password"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:src="@drawable/ic_forward_arrow" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:text="Fish Information"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_sensor_background"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginVertical="6dp">
+            <TextView
+                android:id="@+id/btn_fish_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="Fish Information"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:src="@drawable/ic_forward_arrow" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>

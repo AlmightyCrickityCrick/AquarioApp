@@ -57,7 +57,7 @@ class SensorsFragment : Fragment(), SensorListener {
         val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.fragment_toolbar)
         val toolbarFragmentName = toolbar.findViewById<TextView>(R.id.toolbar_fragment_name)
         if (GlobalUser.aquariums.size == 0) GlobalUser.aquariums.add(AquariumInfo("bcsrtc", "My Aquarium"))
-        toolbarFragmentName.text = GlobalUser.aquariums[0].nickname
+        toolbarFragmentName.text = GlobalUser.aquariums[GlobalUser.currentAquarium].nickname
         activity?.let { setMenuButton(toolbar, it) }
 
         recyclerView = view.findViewById(R.id.sensor_view)

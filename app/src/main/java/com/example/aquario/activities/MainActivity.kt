@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.aquario.R
 import com.example.aquario.activities.fragments.FeedingFragment
 import com.example.aquario.activities.fragments.SensorsFragment
+import com.example.aquario.activities.fragments.SettingsFragment
 import com.example.aquario.data.model.LoggedInUser
 import com.example.aquario.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
@@ -45,7 +46,8 @@ class MainActivity : AppCompatActivity() {
 //            R.id.nav_analytics -> {fragment = AnalyticsFragment() }
             R.id.nav_feeding ->{fragment = FeedingFragment() }
 //            R.id.nav_video->{fragment = VideoFragment()}
-//            R.id.nav_settings->{fragment = SettingFragment()}
+            R.id.nav_settings->{fragment = SettingsFragment()
+            }
         }
         val fragmentM = supportFragmentManager
         if (fragment != null) {
