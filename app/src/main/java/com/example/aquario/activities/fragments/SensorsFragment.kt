@@ -83,6 +83,11 @@ class SensorsFragment : Fragment(), SensorListener {
         activity?.let { setMenuButton(toolbar, it) }
 
         recyclerView = view.findViewById(R.id.sensor_view)
+        initAdapter()
+        nr.text = sensorInfoList.size.toString()
+        toolbarFragmentName.text =
+            GlobalUser.aquariums[GlobalUser.currentAquarium].nickname
+        setCardState(view)
 
         activity?.let {
             sensorCollectionViewModel.sensorResult.observe(it, Observer {
@@ -111,7 +116,7 @@ class SensorsFragment : Fragment(), SensorListener {
     private fun setCardState(view: View) {
         var card = view.findViewById<LinearLayout>(R.id.state_card)
         var waveLoadingView = card.findViewById<WaveLoadingView>(R.id.waveLoadingView)
-        waveLoadingView.centerTitle = GlobalUser.currentAquariumDetails.general_system_State.toString() + "%"
+        waveLoadingView.centerTitle = GlobalUser.currentAquariumDetails.general_system_State.toInt().toString() + "%"
         card.findViewById<TextView>(R.id.tw_state_card_now).text = GlobalUser.currentAquariumDetails.water_level.toString()
         card.findViewById<TextView>(R.id.tw_state_card_recommended).text = getString(R.string.water_level_recommended)
         var calendar = java.util.Calendar.getInstance()

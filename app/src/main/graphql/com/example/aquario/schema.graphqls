@@ -3,6 +3,7 @@ schema {
     mutation: Mutation
 }
 
+"""Projects main Query class, this will inherit multiple queries."""
 type Query {
     users: [UserType]
     user(id: Int): UserType
@@ -75,6 +76,7 @@ type SingleSensorType {
     sensorName: SensorListType!
     currentValue: Float!
     currentTime: DateTime!
+    idealValue: Float!
 }
 
 """An enumeration."""
@@ -135,6 +137,7 @@ type SensorType {
     sensorName: SensorListType!
     currentValue: Float!
     currentTime: DateTime!
+    idealValue: Float!
 }
 
 """
@@ -150,7 +153,7 @@ type Mutation {
     refreshToken(token: String): Refresh
     registerAquarium(aquariumId: String!, feedingTime: Time, fishId: Int, height: Int, length: Int, nickname: String!, volume: Int, width: Int): RegisterAquarium
     modifyAquarium(aquariumId: String!, feedingTime: Time, fishId: Int, nickname: String): ModifyAquariumData
-    addSensor(aquariumId: String!, sensorName: String!, sensorType: String!): AddSensor
+    addSensor(aquariumId: String!, idealValue: Float, sensorName: String!, sensorType: String!): AddSensor
     updateSensor(aquariumId: String!, currentTime: DateTime!, currentValue: Float!, pk: Int!): UpdateSensor
     updateWaterLevel(aquariumId: String!, waterLevel: Float!): UpdateWaterLevel
 }

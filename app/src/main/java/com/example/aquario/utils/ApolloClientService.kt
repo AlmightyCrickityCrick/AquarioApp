@@ -110,7 +110,7 @@ object ApolloClientService {
             for (s in sensors){
                 sen.add(
 
-                    SensorInfo(s.id, s.sensorType.name.toLowerCase(Locale.getDefault()), s.currentValue.toInt(), 0,
+                    SensorInfo(s.id, s.sensorType.name.toLowerCase(Locale.getDefault()), s.currentValue.toInt(), s.idealValue.toInt(),
                         s.currentTime as String
                     )
                 )
@@ -128,7 +128,7 @@ object ApolloClientService {
                         it.id,
                         it.sensorType.name.toLowerCase(Locale.getDefault()),
                         it.currentValue.toInt(),
-                        0,
+                        it.idealValue.toInt(),
                         it.currentTime as String,
                         it.sensorName.sensorName
                     )

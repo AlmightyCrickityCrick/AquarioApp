@@ -21,7 +21,8 @@ query getAquariumDetailsInfo($id: Int!){
             },
             currentTime,
             currentValue,
-            sensorType
+            sensorType,
+            idealValue
         }
     }
 }
