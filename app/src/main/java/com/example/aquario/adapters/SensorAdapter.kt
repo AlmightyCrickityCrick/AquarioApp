@@ -10,6 +10,8 @@ import android.widget.TextView
 import com.example.aquario.R
 import com.example.aquario.data.model.SensorInfo
 import com.example.aquario.listeners.SensorListener
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SensorAdapter(var si:ArrayList<SensorInfo>, var sensorListener: SensorListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -51,11 +53,16 @@ class SensorAdapter(var si:ArrayList<SensorInfo>, var sensorListener: SensorList
         viewHolder.now.text= item.now.toString()
         viewHolder.recommended.text= item.recommended.toString()
         viewHolder.time.text = item.time
-        viewHolder.type.text = item.type
+        viewHolder.type.text = item.type.capitalize(Locale.getDefault())
 
         var imageSRC :Int
         imageSRC = when(item.type){
             "temperature" -> R.drawable.temperature_sensor
+            "ph" -> R.drawable.ph_sensor
+            "turbidity" -> R.drawable.turbidity_sensor
+            "nitrate" -> R.drawable.nitrat_sensor
+            "oxygen" ->R.drawable.o2_sensor
+            "durity" -> R.drawable.duritate_sensor
             else -> R.drawable.ammonium_sensor
         }
         viewHolder.img.setImageResource(imageSRC)

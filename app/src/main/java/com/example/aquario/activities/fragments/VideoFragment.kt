@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.aquario.R
+import com.example.aquario.utils.setMenuButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,6 +40,15 @@ class VideoFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_video, container, false)
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.fragment_toolbar)
+        val toolbarFragmentName = toolbar.findViewById<TextView>(R.id.toolbar_fragment_name)
+        toolbarFragmentName.text = getString(R.string.video_streaming)
+        activity?.let { setMenuButton(toolbar, it) }
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

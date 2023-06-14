@@ -106,7 +106,7 @@
                 android:textStyle="bold"
                 />
             <TextView
-                android:id="@+id/tw_sensor_card_recommended"
+                android:id="@+id/tw_state_card_recommended"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="xyz"
@@ -134,7 +134,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/tw_sensor_card_time"
+                android:id="@+id/tw_state_card_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="xyz"

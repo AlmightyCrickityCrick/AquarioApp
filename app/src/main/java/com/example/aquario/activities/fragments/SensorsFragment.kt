@@ -1,12 +1,15 @@
 package com.example.aquario.activities.fragments
 
 import android.content.Intent
+import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aquario.R
 import com.example.aquario.activities.SensorDetailsActivity
@@ -16,7 +19,10 @@ import com.example.aquario.data.model.AquariumInfo
 import com.example.aquario.data.model.SensorInfo
 import com.example.aquario.listeners.SensorListener
 import com.example.aquario.utils.GlobalUser
+import com.example.aquario.utils.sensor_fragment.SensorCollectionViewModel
 import com.example.aquario.utils.setMenuButton
+import me.itangqi.waveloadingview.WaveLoadingView
+import java.text.SimpleDateFormat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +41,7 @@ class SensorsFragment : Fragment(), SensorListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SensorAdapter
     private var sensorInfo = generateSensors()
+    private var sensorCollectionViewModel = SensorCollectionViewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +50,13 @@ class SensorsFragment : Fragment(), SensorListener {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        fetchAquariumInfo()
+
+    }
+
+    private fun fetchAquariumInfo() {
+        sensorCollectionViewModel.getAquariumInfo()
     }
 
     override fun onCreateView(
@@ -54,27 +68,56 @@ class SensorsFragment : Fragment(), SensorListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        if (GlobalUser.aquariums.size == 0) GlobalUser.aquariums.add(
+            AquariumInfo(
+                "bcsrtc",
+                null,
+                "My Aquarium"
+            )
+        )
         val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.fragment_toolbar)
         val toolbarFragmentName = toolbar.findViewById<TextView>(R.id.toolbar_fragment_name)
-        if (GlobalUser.aquariums.size == 0) GlobalUser.aquariums.add(AquariumInfo("bcsrtc", "My Aquarium"))
-        toolbarFragmentName.text = GlobalUser.aquariums[GlobalUser.currentAquarium].nickname
 
         var nr = view.findViewById<TextView>(R.id.tw_sensor_count)
         nr.text = sensorInfo.size.toString()
         activity?.let { setMenuButton(toolbar, it) }
 
         recyclerView = view.findViewById(R.id.sensor_view)
-        initAdapter()
+
+        activity?.let {
+            sensorCollectionViewModel.sensorResult.observe(it, Observer {
+                val sensorInfo = it ?: return@Observer
+
+                if (sensorInfo.success != null) {
+                    toolbarFragmentName.text =
+                        GlobalUser.aquariums[GlobalUser.currentAquarium].nickname
+                    setCardState(view)
+                    initAdapter()
+                }
+
+            })
+        }
+
 
     }
 
-    private fun initAdapter(){
+    private fun setCardState(view: View) {
+        var card = view.findViewById<LinearLayout>(R.id.state_card)
+        var waveLoadingView = card.findViewById<WaveLoadingView>(R.id.waveLoadingView)
+        waveLoadingView.centerTitle = GlobalUser.currentAquariumDetails.general_system_State.toString() + "%"
+        card.findViewById<TextView>(R.id.tw_state_card_now).text = GlobalUser.currentAquariumDetails.water_level.toString()
+        card.findViewById<TextView>(R.id.tw_state_card_recommended).text = getString(R.string.water_level_recommended)
+        var calendar = java.util.Calendar.getInstance()
+        var format = SimpleDateFormat("d MMM HH:mm")
+        card.findViewById<TextView>(R.id.tw_state_card_time).text = format.format(calendar.time)
+    }
+
+    private fun initAdapter() {
         adapter = SensorAdapter(sensorInfo, this)
         recyclerView.adapter = adapter
-
     }
 
-        companion object {
+    companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

@@ -46,4 +46,5 @@
     <string name="set_timer_for_auto_feeding">Set timer for auto - feeding</string>
     <string name="press_to_cook_the_fish">Press to cook the fish</string>
     <string name="switch_aquarium">Switch Aquarium</string>
+    <string name="water_level_recommended"><![CDATA[>80]]></string>
 </resources>

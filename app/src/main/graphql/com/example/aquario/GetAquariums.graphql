@@ -1,0 +1,7 @@
+query getAquariums{
+    aquariumId {
+        id,
+        aquariumId,
+        nickname
+    }
+}

@@ -1,11 +1,13 @@
 package com.example.aquario.utils
 
 import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.api.Optional
 import com.apollographql.apollo3.network.okHttpClient
-import com.example.aquario.CreateUserMutation
-import com.example.aquario.GetMeQuery
-import com.example.aquario.LoginMutation
+import com.example.aquario.*
+import com.example.aquario.data.model.AquariumDetail
+import com.example.aquario.data.model.AquariumInfo
 import com.example.aquario.data.model.LoggedInUser
+import com.example.aquario.data.model.SensorInfo
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -52,6 +54,90 @@ object ApolloClientService {
                 )
             }
 
+        }
+        return null
+    }
+
+    suspend fun getAquariums(): ArrayList<AquariumInfo>?{
+        try {
+            val response = authorizedApolloClient.query(GetAquariumsQuery()).execute()
+
+            if (response.data?.aquariumId != null) {
+                var aquariums = ArrayList<AquariumInfo>()
+                for (a in response.data!!.aquariumId!!) {
+                    if (a != null) {
+                        aquariums.add(AquariumInfo(a.id,
+                            a.aquariumId,
+                            a.nickname
+                        )
+                        )
+                    }
+                }
+                return aquariums
+            }
+        } catch (e: Throwable){
+            print(e)
+        }
+        return null
+    }
+
+    suspend fun getAquariumDetails(id: String) : AquariumDetail?{
+        try {
+            var response =
+                authorizedApolloClient.query(GetAquariumDetailsInfoQuery(id.toInt())).execute()
+            if (response.data?.aquarium != null) {
+                var det = response.data!!.aquarium
+                if (det != null) {
+                    return AquariumDetail(
+                        det.id, det.nickname,
+                        det.feedingTime as String,
+                        det.waterLevel,
+                        det.generalSystemState,
+                        obtainSenzors(det.sensors)
+                    )
+                }
+            }
+        }catch (e : Throwable){
+            print(e)
+        }
+        return null
+    }
+
+    private fun obtainSenzors(sensors: List<GetAquariumDetailsInfoQuery.Sensor>): ArrayList<SensorInfo>? {
+        if (sensors.size == 0) return null
+        else{
+            var sen = ArrayList<SensorInfo>()
+            for (s in sensors){
+                sen.add(
+                    SensorInfo(s.id, "type", s.currentValue.toInt(), 0,
+                        s.currentTime as String
+                    )
+                )
+            }
+            return sen
+        }
+    }
+
+    suspend fun registerAquarium(aquarium_id: String, nickname:String): String? {
+        try {
+            interceptHttp = OkHttpClient.Builder().addInterceptor(AuthorizationInterceptor(token)).build()
+            authorizedApolloClient = ApolloClient.Builder().serverUrl(URL).okHttpClient(interceptHttp).build()
+
+            val response = authorizedApolloClient.mutation(RegisterAquariumMutation(
+                aquarium_id= aquarium_id,
+                nickname = nickname,
+                fish_id = Optional.present(null),
+                height = Optional.present(null),
+                width = Optional.present(null),
+                length = Optional.present(null),
+                volume = Optional.present(null),
+                feeding_time = Optional.present(null))).execute()
+            print(response)
+            if (response.data != null && response.data!!.registerAquarium !=null){
+                return response.data!!.registerAquarium?.id
+            }
+        } catch (e : Throwable){
+            print(e)
         }
         return null
     }

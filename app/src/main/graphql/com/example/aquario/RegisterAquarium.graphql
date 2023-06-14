@@ -1,6 +1,12 @@
-mutation registerAquarium($aquarium_id: String!, $nickname: String!){
-    registerAquarium(aquarium_id: $aquarium_id, nickname: $nickname){
+mutation registerAquarium($aquarium_id: String!, $nickname: String!, $fish_id: Int, $length: Int, $width: Int, $height: Int, $volume: Int, $feeding_time: Time){
+    registerAquarium(aquariumId: $aquarium_id,
+        nickname: $nickname,
+        fishId: $fish_id,
+        length: $length,
+        width: $width,
+        height: $height,
+        volume: $volume, feedingTime: $feeding_time){
         id,
-        message
+        feedback
     }
 }

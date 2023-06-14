@@ -51,7 +51,7 @@ class AddAquariumActivity : AppCompatActivity() {
             val aquariumResult = it ?: return@Observer
 
             if (aquariumResult.error != null) {
-                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT)
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
             }
             if (aquariumResult.success != null) {
                 intent = Intent(this, MainActivity::class.java)

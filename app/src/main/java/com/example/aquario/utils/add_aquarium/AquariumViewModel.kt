@@ -3,15 +3,17 @@ package com.example.aquario.utils.add_aquarium
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.aquario.R
 import com.example.aquario.data.Result
 import com.example.aquario.data.model.AquariumInfo
+import com.example.aquario.utils.ApolloClientService
 import com.example.aquario.utils.GlobalUser
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
-class AquariumViewModel {
+class AquariumViewModel :ViewModel(){
     private val _aquariumForm = MutableLiveData<AquariumFormState>()
     val aquariumForm: LiveData<AquariumFormState> = _aquariumForm
 
@@ -19,8 +21,14 @@ class AquariumViewModel {
     val aquariumResult: LiveData<AquariumResult> = _aquariumResult
 
     fun registerAquarium(code:String, nickname: String){
-        GlobalUser.aquariums.add(AquariumInfo(code, nickname))
-        _aquariumResult.value = AquariumResult(success = AquariumInfo(code, nickname))
+        runBlocking {
+            val job = GlobalScope.async { ApolloClientService.registerAquarium(code, nickname) }
+            val result = job.await()
+            if (result != null) {
+                _aquariumResult.value = AquariumResult(success = AquariumInfo(result, code, nickname))
+                GlobalUser.aquariums.add(AquariumInfo(result, code, nickname))
+            } else _aquariumResult.value = AquariumResult(error = 2)
+        }
     }
 
     fun aquariumDataChanged(code: String, nickname: String) {
