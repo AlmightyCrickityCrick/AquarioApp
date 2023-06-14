@@ -4,6 +4,7 @@ import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
 import com.apollographql.apollo3.network.okHttpClient
 import com.example.aquario.*
+import com.example.aquario.data.generateSensors
 import com.example.aquario.data.model.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -104,7 +105,7 @@ object ApolloClientService {
     }
 
     private fun obtainSenzors(sensors: List<GetAquariumDetailsInfoQuery.Sensor>): ArrayList<SensorInfo>? {
-        if (sensors.size == 0) return null
+        if (sensors.size == 0) return generateSensors()
         else{
             var sen = ArrayList<SensorInfo>()
             for (s in sensors){

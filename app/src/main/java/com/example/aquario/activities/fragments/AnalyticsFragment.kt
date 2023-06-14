@@ -45,6 +45,7 @@ class AnalyticsFragment : Fragment(), OnItemSelectedListener{
 
     private var currentSensorId = 0
     private var analysisViewModel = AnalysisViewModel()
+    private lateinit var analyticsView: View
 
     private lateinit var chart: LineChart
 
@@ -56,6 +57,16 @@ class AnalyticsFragment : Fragment(), OnItemSelectedListener{
         }
 
         return tmp
+    }
+
+    private fun generateValues(){
+        sensorData = ArrayList<Int>()
+        val value = GlobalUser.currentAquariumDetails.active_sensors?.get(currentSensorId)?.now
+        for (i in 1 .. 7){
+            if (value != null) {
+                sensorData.add((value - 2 .. value + 2).random())
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,8 +90,42 @@ class AnalyticsFragment : Fragment(), OnItemSelectedListener{
         val toolbarFragmentName = toolbar.findViewById<TextView>(R.id.toolbar_fragment_name)
         toolbarFragmentName.text = getString(R.string.analytics)
         activity?.let { setMenuButton(toolbar, it) }
+        analyticsView = view
         setAdapter(view)
+        setupUI(view)
+
+    }
+
+    private fun setupUI(view:View){
+        generateValues()
         setupChart(view)
+        setupData(view)
+    }
+
+    private fun setupData(view: View){
+        var avg = sensorData.average().toInt()
+        var highest = sensorData.maxOrNull()
+        var stateImg:Int
+        if (GlobalUser.currentAquariumDetails.general_system_State < 65)
+            stateImg = R.drawable.status_bad
+        else
+            stateImg = R.drawable.status_good
+
+        var t = GlobalUser.currentAquariumDetails.active_sensors?.get(currentSensorId)?.type
+        var measurement:String = when(t){
+            "temperature" -> "C"
+            "ph" -> ""
+            "turbidity" -> "NTU"
+            "nitrate" -> "ppm"
+            "oxygen" -> "%"
+            "durity" -> "ppm"
+            else -> "ppm"
+        }
+
+        view.findViewById<TextView>(R.id.tv_average_val).text = "$avg $measurement"
+        view.findViewById<TextView>(R.id.tv_highest_value).text = "$highest $measurement"
+        view.findViewById<ImageView>(R.id.iv_current_status).setImageResource(stateImg)
+        view.findViewById<TextView>(R.id.label_y_axis).text = "${t?.capitalize(Locale.getDefault())}, $measurement"
 
     }
 
@@ -88,19 +133,21 @@ class AnalyticsFragment : Fragment(), OnItemSelectedListener{
         chart = view.findViewById(R.id.sensor_line_chart)
         val xAxisValues: List<String> = ArrayList(
             listOf(
-                "Jan",
-                "Feb",
-                "March",
-                "April",
-                "May",
-                "June"
+                "Fri",
+                "Sat",
+                "Sun",
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
             )
         )
 
         val ourLineChartEntries: ArrayList<Entry> = ArrayList()
-
+        var i = 0
         for (v in sensorData){
-            ourLineChartEntries.add(Entry(sensorData.indexOf(v).toFloat(), v.toFloat()))
+            ourLineChartEntries.add(Entry(i.toFloat(), v.toFloat()))
+            i++
         }
         val lineDataSet = LineDataSet(ourLineChartEntries, "")
         lineDataSet.setColors(*ColorTemplate.PASTEL_COLORS)
@@ -165,6 +212,9 @@ class AnalyticsFragment : Fragment(), OnItemSelectedListener{
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         Toast.makeText(activity!!.applicationContext, sensorsArray[position], Toast.LENGTH_SHORT).show()
         currentSensorId = position
+        if (view != null) {
+            setupUI(analyticsView)
+        }
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
