@@ -14,6 +14,9 @@ class SensorCollectionViewModel :ViewModel(){
     private val _sensorResult = MutableLiveData<SensorResult>()
     val sensorResult: LiveData<SensorResult> = _sensorResult
 
+    private val _sensorDetailResult = MutableLiveData<SensorDetailResult>()
+    val sensorDetailResult: LiveData<SensorDetailResult> = _sensorDetailResult
+
     fun getAquariumInfo(){
         runBlocking {
             val job = GlobalScope.async { ApolloClientService.getAquariums() }
@@ -27,6 +30,16 @@ class SensorCollectionViewModel :ViewModel(){
                     _sensorResult.value = SensorResult(success = r)
                 }
             }
+        }
+    }
+
+    fun getSingleSensorInfo(sensor_id: String, aquarium_id: String){
+        runBlocking {
+            val job = GlobalScope.async { ApolloClientService.getSingleSensor(sensor_id, aquarium_id) }
+            val result = job.await()
+            if (result != null) {
+                _sensorDetailResult.value = SensorDetailResult(success = result)
+            } else _sensorDetailResult.value = SensorDetailResult(error = 2)
         }
     }
 }

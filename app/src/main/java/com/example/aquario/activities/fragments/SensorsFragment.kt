@@ -15,6 +15,7 @@ import com.example.aquario.R
 import com.example.aquario.activities.SensorDetailsActivity
 import com.example.aquario.adapters.SensorAdapter
 import com.example.aquario.data.generateSensors
+import com.example.aquario.data.getSensorData
 import com.example.aquario.data.model.AquariumInfo
 import com.example.aquario.data.model.SensorInfo
 import com.example.aquario.listeners.SensorListener
@@ -40,7 +41,7 @@ class SensorsFragment : Fragment(), SensorListener {
     private var param2: String? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SensorAdapter
-    private var sensorInfo = generateSensors()
+    private var sensorInfoList = generateSensors()
     private var sensorCollectionViewModel = SensorCollectionViewModel()
 
 
@@ -79,7 +80,6 @@ class SensorsFragment : Fragment(), SensorListener {
         val toolbarFragmentName = toolbar.findViewById<TextView>(R.id.toolbar_fragment_name)
 
         var nr = view.findViewById<TextView>(R.id.tw_sensor_count)
-        nr.text = sensorInfo.size.toString()
         activity?.let { setMenuButton(toolbar, it) }
 
         recyclerView = view.findViewById(R.id.sensor_view)
@@ -92,7 +92,14 @@ class SensorsFragment : Fragment(), SensorListener {
                     toolbarFragmentName.text =
                         GlobalUser.aquariums[GlobalUser.currentAquarium].nickname
                     setCardState(view)
+                    if(GlobalUser.currentAquariumDetails.active_sensors != null){
+                        sensorInfoList = GlobalUser.currentAquariumDetails.active_sensors!!
+                    } else {
+                        sensorInfoList = generateSensors()
+                        GlobalUser.currentAquariumDetails.active_sensors = sensorInfoList
+                    }
                     initAdapter()
+                    nr.text = sensorInfoList.size.toString()
                 }
 
             })
@@ -113,7 +120,7 @@ class SensorsFragment : Fragment(), SensorListener {
     }
 
     private fun initAdapter() {
-        adapter = SensorAdapter(sensorInfo, this)
+        adapter = SensorAdapter(sensorInfoList, this)
         recyclerView.adapter = adapter
     }
 

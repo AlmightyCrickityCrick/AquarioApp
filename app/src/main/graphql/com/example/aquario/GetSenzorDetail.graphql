@@ -1,0 +1,10 @@
+query getSenzorDetail($aquariumId: String!, $sensorId: Int!){
+    singleSensorType(aquariumId: $aquariumId, sensorId: $sensorId){
+        id,
+        currentValue,
+        currentTime,
+        sensorName {
+            sensorName
+        },
+    }
+}

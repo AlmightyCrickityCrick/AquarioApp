@@ -16,7 +16,7 @@ type Query {
     aquariumSensors(aquariumId: String): [AquariumSensors]
     feedingTime(aquariumId: String): [FeedingTime]
     sensorType(aquariumId: String): [SensorType]
-    singleSensorType(aquariumId: String, sensorId: Int): SingleSensorType
+    singleSensorType(aquariumId: String!, sensorId: Int!): SingleSensorType
     sensorListType: [SensorListType]
 }
 

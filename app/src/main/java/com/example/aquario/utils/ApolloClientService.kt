@@ -118,6 +118,27 @@ object ApolloClientService {
         }
     }
 
+    suspend fun getSingleSensor(senzor_id: String, aquarium_id: String): SensorInfo?{
+        try {
+            val response = authorizedApolloClient.query(GetSenzorDetailQuery(sensorId = senzor_id.toInt(), aquariumId = aquarium_id)).execute()
+            if(response.data!=null){
+                return response.data!!.singleSensorType?.let {
+                    SensorInfo(
+                        it.id,
+                        "type",
+                        it.currentValue.toInt(),
+                        0,
+                        it.currentTime as String,
+                        it.sensorName.sensorName
+                    )
+                }
+            }
+        }catch (e : Throwable) {
+            print(e)
+        }
+        return null
+    }
+
     suspend fun registerAquarium(aquarium_id: String, nickname:String): String? {
         try {
             interceptHttp = OkHttpClient.Builder().addInterceptor(AuthorizationInterceptor(token)).build()
