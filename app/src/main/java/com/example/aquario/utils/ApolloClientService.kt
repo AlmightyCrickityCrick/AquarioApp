@@ -4,13 +4,12 @@ import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
 import com.apollographql.apollo3.network.okHttpClient
 import com.example.aquario.*
-import com.example.aquario.data.model.AquariumDetail
-import com.example.aquario.data.model.AquariumInfo
-import com.example.aquario.data.model.LoggedInUser
-import com.example.aquario.data.model.SensorInfo
+import com.example.aquario.data.model.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 object ApolloClientService {
     private val okHttpClient = OkHttpClient.Builder().build()
@@ -91,6 +90,7 @@ object ApolloClientService {
                     return AquariumDetail(
                         det.id, det.nickname,
                         det.feedingTime as String,
+                        det.aquariumId,
                         det.waterLevel,
                         det.generalSystemState,
                         obtainSenzors(det.sensors)
@@ -109,7 +109,8 @@ object ApolloClientService {
             var sen = ArrayList<SensorInfo>()
             for (s in sensors){
                 sen.add(
-                    SensorInfo(s.id, "type", s.currentValue.toInt(), 0,
+
+                    SensorInfo(s.id, s.sensorType.name.toLowerCase(Locale.getDefault()), s.currentValue.toInt(), 0,
                         s.currentTime as String
                     )
                 )
@@ -125,7 +126,7 @@ object ApolloClientService {
                 return response.data!!.singleSensorType?.let {
                     SensorInfo(
                         it.id,
-                        "type",
+                        it.sensorType.name.toLowerCase(Locale.getDefault()),
                         it.currentValue.toInt(),
                         0,
                         it.currentTime as String,
@@ -136,6 +137,26 @@ object ApolloClientService {
         }catch (e : Throwable) {
             print(e)
         }
+        return null
+    }
+
+    suspend fun getAnalytics(senzor_type: String, aquarium_id : String, interval: String): AnalysisInfo?{
+//        return AnalysisInfo()
+        return null
+    }
+
+    suspend fun modifyAquarium(aquariumId: String, feedingTime: String): String?{
+        try {
+            val response = authorizedApolloClient.mutation(ModifyAquariumMutation(
+                aquariumId = aquariumId,
+                feedingTime = Optional.present(feedingTime),
+                Optional.present(null),
+                Optional.present(null)
+            )).execute()
+            if(response.data != null){
+                return response.data!!.modifyAquarium?.id
+            }
+        }catch (e :Throwable){print(e)}
         return null
     }
 
@@ -162,6 +183,7 @@ object ApolloClientService {
         }
         return null
     }
+
 
     private class AuthorizationInterceptor(val token:String): Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {

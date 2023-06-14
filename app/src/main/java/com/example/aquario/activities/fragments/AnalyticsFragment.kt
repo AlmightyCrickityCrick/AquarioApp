@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import com.example.aquario.R
 import com.example.aquario.data.getSensorData
 import com.example.aquario.data.getSpinnerOptions
+import com.example.aquario.utils.GlobalUser
+import com.example.aquario.utils.analysis.AnalysisViewModel
 import com.example.aquario.utils.setMenuButton
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart
@@ -37,10 +39,24 @@ class AnalyticsFragment : Fragment(), OnItemSelectedListener{
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var sensorsArray = getSpinnerOptions()
-    private var currentSensorId = 0
-    private lateinit var chart: LineChart
+
+    private var sensorsArray = generateSensorOptions()
     private var sensorData = getSensorData()
+
+    private var currentSensorId = 0
+    private var analysisViewModel = AnalysisViewModel()
+
+    private lateinit var chart: LineChart
+
+    private fun generateSensorOptions(): ArrayList<String>{
+        var tmp = ArrayList<String>()
+        for (s in GlobalUser.currentAquariumDetails.active_sensors!!){
+           if(s.type != "ph") tmp.add(s.type.capitalize(Locale.getDefault()) + " Sensor")
+           else tmp.add("pH Sensor")
+        }
+
+        return tmp
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

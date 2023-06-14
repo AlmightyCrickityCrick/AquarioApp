@@ -1,13 +1,17 @@
 package com.example.aquario.activities.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.aquario.R
+import com.example.aquario.activities.AddAquariumActivity
+import com.example.aquario.activities.FeedingTimeSetActivity
 import com.example.aquario.utils.GlobalUser
 import com.example.aquario.utils.setMenuButton
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -61,6 +65,14 @@ class FeedingFragment : Fragment() {
                     feed.setImageResource(R.drawable.feed_icon_orange)
                 }
             }
+
+        val btnAdd = view.findViewById<LinearLayout>(R.id.btn_set_timer)
+        btnAdd.setOnClickListener {
+            activity?.let {
+                var intent = Intent(it, FeedingTimeSetActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     companion object {

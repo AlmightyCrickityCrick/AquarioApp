@@ -6,5 +6,6 @@ query getSenzorDetail($aquariumId: String!, $sensorId: Int!){
         sensorName {
             sensorName
         },
+        sensorType
     }
 }

@@ -23,7 +23,7 @@ class SensorDetailsActivity : AppCompatActivity() {
 
         var id = intent.getStringExtra("ID")
         if (id != null) {
-            sensorCollectionViewModel.getSingleSensorInfo(id, GlobalUser.currentAquariumDetails.id)
+            sensorCollectionViewModel.getSingleSensorInfo(id, GlobalUser.currentAquariumDetails.code)
         }
 
         binding = ActivitySensorDetailsBinding.inflate(layoutInflater)

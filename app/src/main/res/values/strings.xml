@@ -21,7 +21,7 @@
     <string name="sensors">Sensors</string>
     <string name="analytics">Analytics</string>
     <string name="feeding">Feeding</string>
-    <string name="video_streaming">Video Streaming</string>
+    <string name="video_streaming">View</string>
     <string name="settings">Settings</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -47,4 +47,5 @@
     <string name="press_to_cook_the_fish">Press to cook the fish</string>
     <string name="switch_aquarium">Switch Aquarium</string>
     <string name="water_level_recommended"><![CDATA[>80]]></string>
+    <string name="feeding_timer">Feeding Timer</string>
 </resources>

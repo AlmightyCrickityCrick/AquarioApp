@@ -49,13 +49,13 @@
         </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/btn_set_timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/card_sensor_background"
         android:padding="19dp"
         android:layout_marginVertical="8dp">
         <TextView
-            android:id="@+id/btn_set_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="20"

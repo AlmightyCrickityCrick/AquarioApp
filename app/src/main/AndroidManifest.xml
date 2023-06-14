@@ -12,10 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Aquario">
         <activity
-            android:name=".FishDetailActivity"
+            android:name=".activities.FeedingTimeSetActivity"
+            android:exported="false"
+            android:theme="@style/NoActionBarTheme"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".activities.FishDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".FishInformationActivity"
+            android:name=".activities.FishInformationActivity"
             android:exported="false" />
         <activity
             android:name=".activities.SensorDetailsActivity"

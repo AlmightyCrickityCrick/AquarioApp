@@ -1,0 +1,6 @@
+mutation ModifyAquarium($aquariumId: String!, $feedingTime: Time, $fishId: Int, $nickname: String){
+    modifyAquarium(aquariumId: $aquariumId, feedingTime: $feedingTime, fishId: $fishId, nickname: $nickname){
+        id,
+        feedback
+    }
+}

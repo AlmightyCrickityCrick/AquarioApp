@@ -3,6 +3,7 @@ query getAquariumDetailsInfo($id: Int!){
         id,
         nickname,
         waterLevel,
+        aquariumId,
         generalSystemState,
         feedingTime,
         fishId {
@@ -19,8 +20,8 @@ query getAquariumDetailsInfo($id: Int!){
                 sensorName
             },
             currentTime,
-            currentValue
-
+            currentValue,
+            sensorType
         }
     }
 }

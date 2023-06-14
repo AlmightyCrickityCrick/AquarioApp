@@ -13,7 +13,7 @@
         <item name="cardBackground">@color/offwhite</item>
         <item name="android:fontFamily">@font/nunito</item>
         <item name="bottomSheetDialogTheme">@style/Theme.Aquario.BottomSheetDialog</item>
-
+        <item name="android:timePickerDialogTheme">@style/Dialog.Theme</item>
         <!-- Secondary brand color. -->
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -38,12 +38,14 @@
         <item name="drawerColor">@color/offwhite</item>
         <item name="cardBackground">@color/offwhite</item>
         <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:timePickerDialogTheme">@style/Dialog.Theme</item>
         <item name="bottomSheetDialogTheme">@style/Theme.Aquario.BottomSheetDialog</item>
 
     </style>
     <style name="Theme.Aquario.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:timePickerDialogTheme">@style/Dialog.Theme</item>
         <item name="bottomSheetDialogTheme">@style/Theme.Aquario.BottomSheetDialog</item>
     </style>
     <style name="Theme.Aquario.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -51,6 +53,13 @@
 
     <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
         <item name="android:textColor">@color/whitest</item>
+    </style>
+
+    <style name="Dialog.Theme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- BackgroundColor of the date modal -->
+        <item name="colorAccent">@color/orange</item>
+        <!-- Change textColor of the date modal -->
+        <item name="android:textColorPrimary">#000000</item>
     </style>
 
 </resources>

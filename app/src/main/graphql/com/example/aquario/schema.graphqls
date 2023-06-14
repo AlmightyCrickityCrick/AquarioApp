@@ -3,7 +3,6 @@ schema {
     mutation: Mutation
 }
 
-"""Projects main Query class, this will inherit multiple queries."""
 type Query {
     users: [UserType]
     user(id: Int): UserType
@@ -16,7 +15,7 @@ type Query {
     aquariumSensors(aquariumId: String): [AquariumSensors]
     feedingTime(aquariumId: String): [FeedingTime]
     sensorType(aquariumId: String): [SensorType]
-    singleSensorType(aquariumId: String!, sensorId: Int!): SingleSensorType
+    singleSensorType(aquariumId: String, sensorId: Int): SingleSensorType
     sensorListType: [SensorListType]
 }
 
@@ -72,9 +71,34 @@ scalar Time
 
 type SingleSensorType {
     id: ID!
+    sensorType: UserSensorSensorTypeChoices!
     sensorName: SensorListType!
     currentValue: Float!
     currentTime: DateTime!
+}
+
+"""An enumeration."""
+enum UserSensorSensorTypeChoices {
+    """Temperature"""
+    TEMPERATURE
+
+    """PH"""
+    PH
+
+    """Oxygen"""
+    OXYGEN
+
+    """Turbidity"""
+    TURBIDITY
+
+    """Nitrate"""
+    NITRATE
+
+    """Durity"""
+    DURITY
+
+    """Ammonium"""
+    AMMONIUM
 }
 
 type SensorListType {
@@ -107,6 +131,7 @@ type FeedingTime {
 
 type SensorType {
     id: ID!
+    sensorType: UserSensorSensorTypeChoices!
     sensorName: SensorListType!
     currentValue: Float!
     currentTime: DateTime!
@@ -125,7 +150,7 @@ type Mutation {
     refreshToken(token: String): Refresh
     registerAquarium(aquariumId: String!, feedingTime: Time, fishId: Int, height: Int, length: Int, nickname: String!, volume: Int, width: Int): RegisterAquarium
     modifyAquarium(aquariumId: String!, feedingTime: Time, fishId: Int, nickname: String): ModifyAquariumData
-    addSensor(aquariumId: String!, sensorName: String!): AddSensor
+    addSensor(aquariumId: String!, sensorName: String!, sensorType: String!): AddSensor
     updateSensor(aquariumId: String!, currentTime: DateTime!, currentValue: Float!, pk: Int!): UpdateSensor
     updateWaterLevel(aquariumId: String!, waterLevel: Float!): UpdateWaterLevel
 }
