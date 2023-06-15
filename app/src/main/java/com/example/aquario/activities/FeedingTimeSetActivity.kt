@@ -38,7 +38,9 @@ class FeedingTimeSetActivity : AppCompatActivity() {
             var stringTime = ""
             if(time < 10) stringTime = "0$time" else stringTime = "$time"
             var min = binding.pkFeedingTime.minute
-            feedingViewModel.setFeedingTime("$stringTime:$min:00")
+            var formatted_min = ""
+            if(min < 10) formatted_min = "0$min" else formatted_min = "$min"
+            feedingViewModel.setFeedingTime("$stringTime:$formatted_min:00")
         }
     }
 }
