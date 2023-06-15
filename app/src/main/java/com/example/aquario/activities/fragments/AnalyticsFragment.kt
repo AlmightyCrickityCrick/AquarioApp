@@ -9,7 +9,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import androidx.fragment.app.Fragment
 import com.example.aquario.R
 import com.example.aquario.data.getSensorData
-import com.example.aquario.data.getSpinnerOptions
+import com.example.aquario.data.model.AnalysisPoint
 import com.example.aquario.utils.GlobalUser
 import com.example.aquario.utils.analysis.AnalysisViewModel
 import com.example.aquario.utils.setMenuButton
@@ -48,6 +48,20 @@ class AnalyticsFragment : Fragment(), OnItemSelectedListener{
     private lateinit var analyticsView: View
 
     private lateinit var chart: LineChart
+    private var xAxisValues: List<String> = ArrayList(
+        listOf(
+            "Fri",
+            "Sat",
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+        )
+    )
+
+    private var avg = 0
+    private var highest = 0
 
     private fun generateSensorOptions(): ArrayList<String>{
         var tmp = ArrayList<String>()
@@ -67,6 +81,18 @@ class AnalyticsFragment : Fragment(), OnItemSelectedListener{
                 sensorData.add((value - 2 .. value + 2).random())
             }
         }
+
+        xAxisValues= ArrayList(
+        listOf(
+            "Fri",
+            "Sat",
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+        )
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,21 +116,48 @@ class AnalyticsFragment : Fragment(), OnItemSelectedListener{
         val toolbarFragmentName = toolbar.findViewById<TextView>(R.id.toolbar_fragment_name)
         toolbarFragmentName.text = getString(R.string.analytics)
         activity?.let { setMenuButton(toolbar, it) }
+        generateValues()
+
+        activity?.let {
+            analysisViewModel.analysisResult.observe(it, androidx.lifecycle.Observer {
+                var analysisResObs = it ?: return@Observer
+
+                if(analysisResObs.success != null){
+                    avg = analysisResObs.success!!.average_value.toInt()
+                    highest = analysisResObs.success!!.highest_value.toInt()
+                    getSensorDataFromServer(analysisResObs.success!!.value_list)
+                    setupUI(view)
+                }
+
+            })
+        }
+
         analyticsView = view
         setAdapter(view)
         setupUI(view)
 
     }
 
+    private fun getSensorDataFromServer(valueList: ArrayList<AnalysisPoint>?) {
+        sensorData = ArrayList<Int>()
+        var tmp = ArrayList<String>()
+        if(valueList != null){
+            for (v in valueList){
+                sensorData.add(v.value.toInt())
+                tmp.add(v.time)
+            }
+
+            xAxisValues = ArrayList(tmp)
+        } else generateValues()
+
+    }
+
     private fun setupUI(view:View){
-        generateValues()
         setupChart(view)
         setupData(view)
     }
 
     private fun setupData(view: View){
-        var avg = sensorData.average().toInt()
-        var highest = sensorData.maxOrNull()
         var stateImg:Int
         if (GlobalUser.currentAquariumDetails.general_system_State < 65)
             stateImg = R.drawable.status_bad
@@ -131,17 +184,6 @@ class AnalyticsFragment : Fragment(), OnItemSelectedListener{
 
     private fun setupChart(view: View){
         chart = view.findViewById(R.id.sensor_line_chart)
-        val xAxisValues: List<String> = ArrayList(
-            listOf(
-                "Fri",
-                "Sat",
-                "Sun",
-                "Mon",
-                "Tue",
-                "Wed",
-                "Thu",
-            )
-        )
 
         val ourLineChartEntries: ArrayList<Entry> = ArrayList()
         var i = 0
@@ -210,10 +252,12 @@ class AnalyticsFragment : Fragment(), OnItemSelectedListener{
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        Toast.makeText(activity!!.applicationContext, sensorsArray[position], Toast.LENGTH_SHORT).show()
         currentSensorId = position
         if (view != null) {
-            setupUI(analyticsView)
+            GlobalUser.currentAquariumDetails.active_sensors?.get(position)?.id?.let {
+                analysisViewModel.getAnalysis(
+                    it.toInt(), GlobalUser.currentAquariumDetails.code, "Week")
+            }
         }
     }
 

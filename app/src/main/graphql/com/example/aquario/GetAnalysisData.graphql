@@ -1,0 +1,8 @@
+query getAnalysisData($sensorId: Int, $aquariumId: String, $timePeriod: String, $nrRecords: Int){
+    sensorHistory(sensorId: $sensorId, aquariumId: $aquariumId, timePeriod: $timePeriod, nrRecords: $nrRecords){
+        sensorValue,
+        sensorTime
+    },
+    meanValue(sensorId: $sensorId, aquariumId: $aquariumId, timePeriod: $timePeriod),
+    maxValue(sensorId: $sensorId, aquariumId: $aquariumId, timePeriod: $timePeriod)
+}

@@ -9,6 +9,9 @@ import com.example.aquario.data.model.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import java.text.SimpleDateFormat
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -141,8 +144,40 @@ object ApolloClientService {
         return null
     }
 
-    suspend fun getAnalytics(senzor_type: String, aquarium_id : String, interval: String): AnalysisInfo?{
-//        return AnalysisInfo()
+    suspend fun getAnalytics(senzor_type: Int, aquarium_id : String, interval: String): AnalysisInfo?{
+        try{
+            var response = authorizedApolloClient.query(GetAnalysisDataQuery(
+                sensorId = Optional.present(senzor_type),
+                aquariumId = Optional.present(aquarium_id),
+                timePeriod = Optional.present(interval),
+                nrRecords = Optional.present(7)
+
+            )).execute()
+            if(response.data != null){
+                return AnalysisInfo(senzor_type.toString(),
+                    response.data!!.meanValue!!,
+                    response.data!!.maxValue!!,
+                    GlobalUser.currentAquariumDetails.general_system_State.toInt(),
+                    extractAnalysisPoints(response.data!!.sensorHistory)
+                )
+            }
+        }catch (e :Throwable){print(e)}
+        return null
+    }
+
+    private fun extractAnalysisPoints(sensorHistory: List<GetAnalysisDataQuery.SensorHistory?>?) :ArrayList<AnalysisPoint>?{
+        var tmp = ArrayList<AnalysisPoint>()
+        if (sensorHistory != null && sensorHistory.size != 0) {
+            for (s in sensorHistory){
+                if (s != null) {
+                    var t = s.sensorTime as String
+                    var time = ZonedDateTime.parse(t)
+                    var formated = time.format(DateTimeFormatter.ofPattern("LLL dd"))
+                    tmp.add(AnalysisPoint(s.sensorValue, formated.toString()))
+                }
+            }
+            return tmp
+        }
         return null
     }
 

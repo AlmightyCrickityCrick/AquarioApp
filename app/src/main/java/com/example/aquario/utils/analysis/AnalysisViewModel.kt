@@ -12,7 +12,7 @@ class AnalysisViewModel :ViewModel(){
     private val _analysisResult = MutableLiveData<AnalysisResult>()
     val analysisResult: LiveData<AnalysisResult> = _analysisResult
 
-    fun getAnalysis(senzor_type: String, aquarium_id : String, interval: String){
+    fun getAnalysis(senzor_type: Int, aquarium_id : String, interval: String){
         runBlocking {
             val job = GlobalScope.async { ApolloClientService.getAnalytics(senzor_type, aquarium_id, interval) }
             val result = job.await()
