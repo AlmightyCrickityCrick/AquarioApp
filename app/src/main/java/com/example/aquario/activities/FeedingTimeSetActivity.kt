@@ -35,8 +35,10 @@ class FeedingTimeSetActivity : AppCompatActivity() {
 
         binding.btnSaveTime.setOnClickListener {
             var time = binding.pkFeedingTime.hour
+            var stringTime = ""
+            if(time < 10) stringTime = "0$time" else stringTime = "$time"
             var min = binding.pkFeedingTime.minute
-            feedingViewModel.setFeedingTime("$time:$min:00")
+            feedingViewModel.setFeedingTime("$stringTime:$min:00")
         }
     }
 }
